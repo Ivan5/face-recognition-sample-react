@@ -85,15 +85,13 @@ app.get("/profile/:id", (req, res) => {
 });
 
 app.put("/image", (req, res) => {
-  const id = req.params;
+  const { id } = req.body;
   let found = false;
   database.users.forEach(user => {
     if (user.id === id) {
       found = true;
       user.entries++;
       return res.json(user.entries);
-    } else {
-      res.status(400).json("No such user");
     }
   });
   if (!found) {
